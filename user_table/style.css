@@ -59,7 +59,7 @@ th {
 
 th,
 td {
-  padding: 10px 50px;
+  padding: 5px 40px;
 }
 
 table {
@@ -89,9 +89,6 @@ button {
   border: none;
 }
 
-.td_delete {
-  height: 51px;
-  display: flex;
-  padding: 0px 10px 0px 10px;
-  justify-content: center;
+img{
+  width: 45px;
 }
