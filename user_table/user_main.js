@@ -21,3 +21,24 @@ tr.append(th_1);
 tr.append(th_2);
 tr.append(th_3);
 tr.append(th_4);
+
+fetch("https://jsonplaceholder.typicode.com/users")
+  .then((res) => res.json())
+  .then((users) => {
+    for (const user of users){
+      const user_line = document.createElement("tr");
+      table.append(user_line);
+      const td_name = document.createElement("td");
+      td_name.textContent = user.name;
+      const td_username = document.createElement("td");
+      td_username.textContent = user.username;
+      const td_email = document.createElement("td");
+      td_email.textContent = user.email;
+      const td_phone = document.createElement("td");
+      td_phone.textContent = user.phone;
+      user_line.append(td_name);
+      user_line.append(td_username);
+      user_line.append(td_email);
+      user_line.append(td_phone);
+    }
+  })
