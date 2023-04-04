@@ -81,51 +81,7 @@ function loadUsers() {
     .then((res) => res.json())
     .then((users) => {
       for (const user of users) {
-        const user_line = document.createElement("tr");
-        user_line.id = user.id;
-        user_line.className = 'user_line';
-        table.append(user_line);
-        const td_name = document.createElement("td");
-        td_name.className = 'text';
-        td_name.textContent = user.name;
-        const td_username = document.createElement("td");
-        td_username.className = 'text';
-        td_username.textContent = user.username;
-        const td_email = document.createElement("td");
-        td_email.className = 'text';
-        td_email.textContent = user.email;
-        const td_phone = document.createElement("td");
-        td_phone.className = 'text';
-        td_phone.textContent = user.phone;
-        user_line.append(td_name);
-        user_line.append(td_username);
-        user_line.append(td_email);
-        user_line.append(td_phone);
-
-        //Delete button
-        const delete_button = document.createElement('img');
-        delete_button.src = './png/delete.png';
-
-        const td_delete = document.createElement("td");
-        td_delete.className = "td_delete";
-
-        add_delete_listener(td_delete);
-
-        td_delete.append(delete_button);
-        user_line.append(td_delete);
-
-        //Modify button
-        const modify_button = document.createElement('img');
-        modify_button.src = "./png/modify.png";
-
-        const td_modify = document.createElement("td");
-        td_modify.className = "td_modify";
-
-        add_modify_listener(td_modify);
-
-        td_modify.append(modify_button);
-        user_line.append(td_modify);
-
+        createUserRow(user)
       }
     });
 }
@@ -146,59 +102,14 @@ function AddUsers() {
   }).then((res) => {
     if (res.ok) {
       console.log("Sto aggiungendo un nuovo user");
-      const user_line = document.createElement("tr");
-      user_line.id = id++;
-      table.append(user_line);
-      user_line.className = 'user_line';
-      const td_name = document.createElement("td");
-      td_name.className = 'text';
-      td_name.textContent = name_input.value;
-      console.log(name_input.value);
-      const td_username = document.createElement("td");
-      td_username.className = 'text';
-      td_username.textContent = username_input.value;
-      console.log(username_input.value);
-      const td_email = document.createElement("td");
-      td_email.className = 'text';
-      td_email.textContent = email_input.value;
-      console.log(email_input.value);
-      const td_phone = document.createElement("td");
-      td_phone.className = 'text';
-      td_phone.textContent = phone_input.value;
-      console.log(phone_input.value);
-      user_line.append(td_name);
-      user_line.append(td_username);
-      user_line.append(td_email);
-      user_line.append(td_phone);
-
-      console.log("Aggiunto user!");
-
-      //Delete button
-
-      const delete_button = document.createElement('img');
-      delete_button.src = './png/delete.png';
-
-      const td_delete = document.createElement("td");
-      td_delete.className = "td_delete";
-
-      add_delete_listener(td_delete);
-
-      td_delete.append(delete_button)
-      user_line.append(td_delete);
-
-      //Modify button
-
-      const modify_button = document.createElement('img');
-      modify_button.src = "./png/modify.png"
-
-      const td_modify = document.createElement("td");
-      td_modify.className = "td_modify";
-
-      add_modify_listener(td_modify);
-
-      td_modify.append(modify_button)
-      user_line.append(td_modify);
-
+      const newUser = {
+        name: name_input.value,
+        username: username_input.value,
+        email: email_input.value,
+        phone: phone_input.value,
+        id: id
+      }
+      createUserRow(newUser)
     }
   })
 };
@@ -235,52 +146,7 @@ function add_delete_listener(add_delete) {
                   console.log('Questo user è stato eliminato.');
 
                 } else {
-                  const user_line = document.createElement("tr");
-                  user_line.id = user.id;
-                  user_line.className = 'user_line';
-                  table.append(user_line);
-                  const td_name = document.createElement("td");
-                  td_name.className = 'text';
-                  td_name.textContent = user.name;
-                  const td_username = document.createElement("td");
-                  td_username.className = 'text';
-                  td_username.textContent = user.username;
-                  const td_email = document.createElement("td");
-                  td_email.className = 'text';
-                  td_email.textContent = user.email;
-                  const td_phone = document.createElement("td");
-                  td_phone.className = 'text';
-                  td_phone.textContent = user.phone;
-                  user_line.append(td_name);
-                  user_line.append(td_username);
-                  user_line.append(td_email);
-                  user_line.append(td_phone);
-
-                  //Delete button
-
-                  const delete_button = document.createElement('img');
-                  delete_button.src = './png/delete.png';
-
-                  const td_delete = document.createElement("td");
-                  td_delete.className = "td_delete";
-
-                  add_delete_listener(td_delete);
-
-                  td_delete.append(delete_button)
-                  user_line.append(td_delete);
-
-                  //Modify button
-
-                  const modify_button = document.createElement('img');
-                  modify_button.src = "./png/modify.png"
-
-                  const td_modify = document.createElement("td");
-                  td_modify.className = "td_modify";
-
-                  add_modify_listener(td_modify);
-
-                  td_modify.append(modify_button)
-                  user_line.append(td_modify);
+                  createUserRow(user);
 
                 }
               }
@@ -291,6 +157,53 @@ function add_delete_listener(add_delete) {
   })
 };
 
+
+function createUserRow(user) {
+  const user_line = document.createElement("tr");
+  user_line.id = user.id;
+  user_line.className = 'user_line';
+  table.append(user_line);
+  const td_name = document.createElement("td");
+  td_name.className = 'text';
+  td_name.textContent = user.name;
+  const td_username = document.createElement("td");
+  td_username.className = 'text';
+  td_username.textContent = user.username;
+  const td_email = document.createElement("td");
+  td_email.className = 'text';
+  td_email.textContent = user.email;
+  const td_phone = document.createElement("td");
+  td_phone.className = 'text';
+  td_phone.textContent = user.phone;
+  user_line.append(td_name);
+  user_line.append(td_username);
+  user_line.append(td_email);
+  user_line.append(td_phone);
+
+  //Delete button
+  const delete_button = document.createElement('img');
+  delete_button.src = './png/delete.png';
+
+  const td_delete = document.createElement("td");
+  td_delete.className = "td_delete";
+
+  add_delete_listener(td_delete);
+
+  td_delete.append(delete_button);
+  user_line.append(td_delete);
+
+  //Modify button
+  const modify_button = document.createElement('img');
+  modify_button.src = "./png/modify.png";
+
+  const td_modify = document.createElement("td");
+  td_modify.className = "td_modify";
+
+  add_modify_listener(td_modify);
+
+  td_modify.append(modify_button);
+  user_line.append(td_modify);
+}
 
 //Function for modifying users
 
