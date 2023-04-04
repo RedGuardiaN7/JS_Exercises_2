@@ -1,0 +1,4 @@
+C'è un po' troppo copincolla. Una volta che il codice funziona poi devi pulirlo, non basta che funzioni.
+Ho estratto un paio di funzioni, ma si potrebbe ancora fare di meglio.
+Dai un'occhiata qua a quale potrebbe essere il segnale che il tuo codice ha bisogno di una ripulita:
+https://refactoring.guru/refactoring/smells
