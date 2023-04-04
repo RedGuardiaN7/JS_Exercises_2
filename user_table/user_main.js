@@ -68,70 +68,67 @@ form.append(phone_input);
 
 document.body.appendChild(button);
 
-//Load users event
-
-fetch("https://jsonplaceholder.typicode.com/users")
-  .then((res) => res.json())
-  .then((users) => {
-    for (const user of users) {
-      const user_line = document.createElement("tr");
-      user_line.id = user.id;
-      user_line.className = 'user_line';
-      table.append(user_line);
-      const td_name = document.createElement("td");
-      td_name.className = 'text';
-      td_name.textContent = user.name;
-      const td_username = document.createElement("td");
-      td_username.className = 'text';
-      td_username.textContent = user.username;
-      const td_email = document.createElement("td");
-      td_email.className = 'text';
-      td_email.textContent = user.email;
-      const td_phone = document.createElement("td");
-      td_phone.className = 'text';
-      td_phone.textContent = user.phone;
-      user_line.append(td_name);
-      user_line.append(td_username);
-      user_line.append(td_email);
-      user_line.append(td_phone);
-
-      //Delete button
-
-      const delete_button = document.createElement('img');
-      delete_button.src = './png/delete.png';
-
-      const td_delete = document.createElement("td");
-      td_delete.className = "td_delete";
-
-      add_delete_listener(td_delete);
-
-      td_delete.append(delete_button)
-      user_line.append(td_delete);
-
-      //Modify button
-
-      const modify_button = document.createElement('img');
-      modify_button.src = "./png/modify.png"
-
-      const td_modify = document.createElement("td");
-      td_modify.className = "td_modify";
-
-      add_modify_listener(td_modify);
-
-      td_modify.append(modify_button)
-      user_line.append(td_modify);
-
-    }
-  });
+loadUsers();
 
 const tds = document.getElementsByTagName('td');
 
-
-
-//Add users event
 let id = 10;
 
 button.addEventListener('click', AddUsers);
+
+function loadUsers() {
+  fetch("https://jsonplaceholder.typicode.com/users")
+    .then((res) => res.json())
+    .then((users) => {
+      for (const user of users) {
+        const user_line = document.createElement("tr");
+        user_line.id = user.id;
+        user_line.className = 'user_line';
+        table.append(user_line);
+        const td_name = document.createElement("td");
+        td_name.className = 'text';
+        td_name.textContent = user.name;
+        const td_username = document.createElement("td");
+        td_username.className = 'text';
+        td_username.textContent = user.username;
+        const td_email = document.createElement("td");
+        td_email.className = 'text';
+        td_email.textContent = user.email;
+        const td_phone = document.createElement("td");
+        td_phone.className = 'text';
+        td_phone.textContent = user.phone;
+        user_line.append(td_name);
+        user_line.append(td_username);
+        user_line.append(td_email);
+        user_line.append(td_phone);
+
+        //Delete button
+        const delete_button = document.createElement('img');
+        delete_button.src = './png/delete.png';
+
+        const td_delete = document.createElement("td");
+        td_delete.className = "td_delete";
+
+        add_delete_listener(td_delete);
+
+        td_delete.append(delete_button);
+        user_line.append(td_delete);
+
+        //Modify button
+        const modify_button = document.createElement('img');
+        modify_button.src = "./png/modify.png";
+
+        const td_modify = document.createElement("td");
+        td_modify.className = "td_modify";
+
+        add_modify_listener(td_modify);
+
+        td_modify.append(modify_button);
+        user_line.append(td_modify);
+
+      }
+    });
+}
 
 function AddUsers() {
 
